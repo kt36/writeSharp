@@ -1,0 +1,9 @@
+'name': 'Write#'
+'filetypes': [
+  'w#'
+  'write#'
+]
+'patterns': [
+  'match': '()'
+  'name': 'keyword'
+]

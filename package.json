@@ -1,0 +1,14 @@
+{
+  "name": "write#",
+  "main": "./lib/write#",
+  "version": "0.0.0",
+  "description": "A short description of your package",
+  "activationEvents": ["write#:load"],
+  "repository": "https://github.com/atom/write#",
+  "license": "MIT",
+  "engines": {
+    "atom": ">0.50.0"
+  },
+  "dependencies": {
+  }
+}
