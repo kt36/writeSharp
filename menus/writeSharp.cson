@@ -1,15 +1,15 @@
 # See https://atom.io/docs/latest/creating-a-package#menus for more details
 'context-menu':
   '.overlayer':
-      'Enable write#': 'write#:toggle'
+      'Enable writeSharp': 'writeSharp:load'
 
 'menu': [
   {
     'label': 'Packages'
     'submenu': [
-      'label': 'write#'
+      'label': 'writeSharp'
       'submenu': [
-        { 'label': 'Load', 'command': 'write#:load' }
+        { 'label': 'Load', 'command': 'writeSharp:load' }
       ]
     ]
   }

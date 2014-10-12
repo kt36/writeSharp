@@ -1,10 +1,10 @@
 {
-  "name": "write#",
-  "main": "./lib/write#",
+  "name": "writeSharp",
+  "main": "./lib/writeSharp",
   "version": "0.0.0",
   "description": "A short description of your package",
-  "activationEvents": ["write#:load"],
-  "repository": "https://github.com/atom/write#",
+  "activationEvents": ["writeSharp:load"],
+  "repository": "https://github.com/kt36/writeSharp",
   "license": "MIT",
   "engines": {
     "atom": ">0.50.0"

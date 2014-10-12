@@ -1,13 +1,13 @@
 {View} = require 'atom'
 
 module.exports =
-class Write#View extends View
+class writeSharpView extends View
   @content: ->
-    @div class: 'write# overlay from-top', =>
-      @div "The Write# package is Alive! It's ALIVE!", class: "message"
+    @div class: 'writeSharp overlay from-top', =>
+      @div "The writeSharp package is Alive! It's ALIVE!", class: "message"
 
   initialize: (serializeState) ->
-    atom.workspaceView.command "write#:toggle", => @toggle()
+    atom.workspaceView.command "writeSharp:toggle", => @toggle()
 
   # Returns an object that can be retrieved when package is activated
   serialize: ->
@@ -17,7 +17,7 @@ class Write#View extends View
     @detach()
 
   toggle: ->
-    console.log "Write#View was toggled!"
+    console.log "writeSharpView was toggled!"
     if @hasParent()
       @detach()
     else
