@@ -21,28 +21,25 @@ module.exports =
 
     # refreshKeys will be used only when a new key is created or an existing key
     # has its name changed
-  refreshKeys: ->
-    parent = atom.workspace.getActivePaneItem()?.buffer.file.getParent()
+  refreshKeys: (file) ->
+    parent = file.getParent()
     console.log("opened parent directory")
 
-    if isDictionary(parent)
+    if dname.isDirectory() and isDictionary(parent)
+      console.log("in dictionary")
       allKeys = @checkPaths(parent.getEntriesSync())
     else
       console.log("not in dictionary")
       allDirs = parent.getEntriesSync()
-      allDirs = (directory for directory in allDirs when @isDictionary(dname)
-      allKeys = @checkPaths(null, allDirs)
+      allDirs = (directory for directory in allDirs when dname.isDirectory() and @isDictionary(dname)
+      allKeys = @checkPaths(allDirs)
       console.log("checked all dictionaries")
 
-    @construct(allKeys)
+    @construct(allKeys, file.getBaseName())
     console.log("wrote to keyword file")
 
   # checkPaths is called only by @refreshKeys
-  checkPaths: (error, pathNames, allKeys) ->
-    if error isnt null
-      # show error to user
-      return
-
+  checkPaths: (pathNames, allKeys) ->
     if pathNames.length <= 0
       return allKeys
 
@@ -51,17 +48,37 @@ module.exports =
       allKeys.push(path.getBaseName())
     else
       pathNames.push(pname) for pname in path.getEntriesSync() when pname.isFile() and pName.getBaseName().search("-dictionary") > -1
-    @checkPaths(null, pathNames, allKeys)
+    @checkPaths(pathNames, allKeys)
 
   # construct creates or overwrites the corresponding keyword file
-  construct: (allKeys) ->
+  construct: (allKeys, fname) ->
     # write hidden keyword file
+    fname.replace(".", "-")
+    File.constructor("." + fname + ".keys")
 
   # switch out the grammar file for the provided keyword file
   # file is the file whose keyword file should be switched into grammar
   switchOut: (file) ->
+    # direct read is required
+    contents = file.read(true)
+    grammarPath = PackageManager.resolvePackagePath("writeSharp") + "/grammars/writeSharp.cson"
+    File.constructor(grammarPath).write(contents)
+
+  # create new keyword
+  newKey: ->
+    # play around with using atom.open() instead
+    name = prompt("Enter file name", atom.workspace.getActivePaneItem?.buffer.file.getPath() + "/something.ws")
+    prevFile = atom.workspace.getActivePaneItem()?.buffer.file
+    atom.workspace.open(name)
+    @refreshKeys(prevFile)
+
+  # create new Dictionary
+  newDictionary: ->
+    # play around with using atom.open() instead
+    name = prompt("Enter file name", atom.workspace.getActivePaneItem?.buffer.file.getPath() + "/new-dictionary/")
+    if isDictionary(name)? atom.workspace.open(name) : atom.confirm(["No -dictionary ending"])
 
   # returns whether the directory is a dictionary
   # dname is a directory
   isDictionary: (dname) ->
-    dName.getBaseName().search("-dictionary") > -1 and dname.isDirectory()
+    dName.getBaseName().search("-dictionary") > -1
