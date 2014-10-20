@@ -8,4 +8,5 @@
 # For more detailed documentation see
 # https://atom.io/docs/latest/advanced/keymaps
 '.workspace':
-  'ctrl-alt-l': 'writeSharp:load'
+  'ctrl-alt-K': 'writeSharp:newKey'
+  'ctrl-alt-D': 'writeSharp:newDictionary'

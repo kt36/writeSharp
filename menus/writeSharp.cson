@@ -9,7 +9,8 @@
     'submenu': [
       'label': 'writeSharp'
       'submenu': [
-        { 'label': 'Load', 'command': 'writeSharp:load' }
+        { 'label': 'New Key', 'command': 'writeSharp:newKey' }
+        { 'label': 'New Dictionary', 'command': 'writeSharp:newDictionary' }
       ]
     ]
   }

@@ -3,7 +3,7 @@
   "main": "./lib/writeSharp",
   "version": "0.0.0",
   "description": "A short description of your package",
-  "activationEvents": ["writeSharp:load"],
+  "activationEvents": [],
   "repository": "https://github.com/kt36/writeSharp",
   "license": "MIT",
   "engines": {
